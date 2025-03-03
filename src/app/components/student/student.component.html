@@ -1,0 +1,37 @@
+<h2>Students</h2>
+<div>
+  <input [(ngModel)]="newStudent.nombre" placeholder="Name">
+  <input [(ngModel)]="newStudent.cedula" placeholder="Documento">
+  <input [(ngModel)]="newStudent.fechaNacimiento" placeholder="Birthdate" type="date">
+  <button (click)="addStudent()">Add</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Documento</th>
+      <th>Name</th>
+      <th>Birthdate</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{ student.cedula }}</td>
+      <td>{{ student.nombre }}</td>
+      <td>{{ student.fechaNacimiento | date }}</td>
+      <td>
+        <button (click)="editStudent(student)">Edit</button>
+        <button (click)="deleteStudent(student.cedula)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="editingStudent">
+  <h3>Edit Student</h3>
+  <input [(ngModel)]="editingStudent.nombre" placeholder="Name">
+  <input [(ngModel)]="editingStudent.cedula" placeholder="Documento" disabled>
+  <input [(ngModel)]="editingStudent.fechaNacimiento" placeholder="Birthdate" type="date">
+  <button (click)="updateStudent()">Update</button>
+</div>
