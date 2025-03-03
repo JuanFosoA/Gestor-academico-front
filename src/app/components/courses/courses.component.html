@@ -1,0 +1,91 @@
+<h2>Courses</h2>
+
+<!-- Formulario para agregar un curso -->
+<div>
+  <input [(ngModel)]="newCourse.nombre" placeholder="Course Name">
+  <input [(ngModel)]="newCourse.descripcion" placeholder="Description">
+  
+  <label>Day:</label>
+  <select [(ngModel)]="newCourse.dia">
+    <option *ngFor="let day of diasSemana" [value]="day">{{ day }}</option>
+  </select>
+
+  <label>Start Time:</label>
+  <input type="time" [(ngModel)]="newCourse.horaInicio">
+
+  <label>End Time:</label>
+  <input type="time" [(ngModel)]="newCourse.horaFin">
+
+  <label>Department:</label>
+  <select [(ngModel)]="newCourse.departmentId">
+    <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.nombre }}</option>
+  </select>
+
+  <label>Prerequisites:</label>
+  <select [(ngModel)]="newCourse.prerrequisitos" multiple>
+    <option *ngFor="let course of courses" [value]="course.id">{{ course.nombre }}</option>
+  </select>
+
+  <button (click)="addCourse()">Add Course</button>
+</div>
+
+<!-- Tabla de cursos -->
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Day</th>
+      <th>Time</th>
+      <th>Department</th>
+      <th>Prerequisites</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let course of courses">
+      <td>{{ course.id }}</td>
+      <td>{{ course.nombre }}</td>
+      <td>{{ course.descripcion }}</td>
+      <td>{{ course.dia }}</td>
+      <td>{{ course.horaInicio }} - {{ course.horaFin }}</td>
+      <td>{{ getDepartmentName(course.departmentId) }}</td>
+      <td>{{ getPrerequisites(course.prerrequisitos) }}</td>
+      <td>
+        <button (click)="editCourse(course)">Edit</button>
+        <button (click)="deleteCourse(course.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Formulario de edición -->
+<div *ngIf="editingCourse">
+  <h3>Edit Course</h3>
+  <input [(ngModel)]="editingCourse.nombre">
+  <input [(ngModel)]="editingCourse.descripcion">
+
+  <label>Day:</label>
+  <select [(ngModel)]="editingCourse.dia">
+    <option *ngFor="let day of diasSemana" [value]="day">{{ day }}</option>
+  </select>
+
+  <label>Start Time:</label>
+  <input type="time" [(ngModel)]="editingCourse.horaInicio">
+
+  <label>End Time:</label>
+  <input type="time" [(ngModel)]="editingCourse.horaFin">
+
+  <label>Department:</label>
+  <select [(ngModel)]="editingCourse.departmentId">
+    <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.nombre }}</option>
+  </select>
+
+  <label>Prerequisites:</label>
+  <select [(ngModel)]="editingCourse.prerrequisitos" multiple>
+    <option *ngFor="let course of courses" [value]="course.id">{{ course.nombre }}</option>
+  </select>
+
+  <button (click)="updateCourse()">Update</button>
+</div>

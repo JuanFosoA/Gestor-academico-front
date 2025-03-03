@@ -1,20 +1,10 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
+import { DepartmentComponent } from './components/department/department.component';
+import { CourseComponent } from './components/courses/courses.component';
+import { StudentComponent } from './components/student/student.component';
 
 export const routes: Routes = [
-    {
-        path:'',
-        loadComponent:()=>import('./components/teacher-list/teacher-list.component').then((m)=>m.TeacherListComponent)
-    },
-    {
-        path:'teacher',
-        loadComponent:()=>import('./components/teacher-form/teacher-form.component').then((m)=>m.TeacherFormComponent)
-    },
+  { path: 'departments', component: DepartmentComponent },
+  { path: 'courses', component: CourseComponent },
+  { path: 'students', component: StudentComponent },
 ];
-
-@NgModule({
-    imports:[RouterModule.forRoot(routes)],
-    exports:[RouterModule]
-})
-
-export class AppRoutingModule{}

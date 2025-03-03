@@ -1,0 +1,87 @@
+/* Contenedor principal */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Formulario de agregar y editar */
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  input, select, button {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Tabla de cursos */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Botones de acciones */
+  td button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  td button:nth-child(1) {
+    background-color: #28a745;
+  }
+  
+  td button:nth-child(1):hover {
+    background-color: #218838;
+  }
+  
+  td button:nth-child(2) {
+    background-color: #dc3545;
+  }
+  
+  td button:nth-child(2):hover {
+    background-color: #c82333;
+  }
+  
+  /* Estilo del formulario de edición */
+  div[ngIf] {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+  }
+  

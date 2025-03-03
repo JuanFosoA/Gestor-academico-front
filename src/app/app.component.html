@@ -1,2 +1,23 @@
-<app-navbar/>
-<router-outlet/>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Responsive</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Gestor acádemico</div>
+        <nav>
+            <a routerLink="/departments" routerLinkActive="active">Departamentos</a>
+            <a href="#">Profesores</a>
+            <a routerLink="/students" routerLinkActive="active">Estudiantes</a>
+            <a href="#">Matrículas</a>
+            <a routerLink="/courses" routerLinkActive="active">Cursos</a>
+        </nav>
+    </header>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</body>
+</html>
