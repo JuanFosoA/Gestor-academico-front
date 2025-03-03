@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header Responsive</title>
-    <style>
-        
-    </style>
 </head>
 <body>
     <header>
         <div class="logo">Gestor acádemico</div>
         <nav>
-            <a href="#">Departamentos</a>
+            <a routerLink="/departments" routerLinkActive="active">Departamentos</a>
             <a href="#">Profesores</a>
-            <a href="#">Estudiantes</a>
+            <a routerLink="/students" routerLinkActive="active">Estudiantes</a>
             <a href="#">Matrículas</a>
-            <a href="#">Cursos</a>
+            <a routerLink="/courses" routerLinkActive="active">Cursos</a>
         </nav>
     </header>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
 </body>
 </html>
