@@ -1,32 +1,34 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface Teacher {
+  nombre: string;
+  documento:string;
+  fechaContrato: Date;
+  departmentId: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeachersService {
- constructor(private http:HttpClient){}
+  private apiUrl = 'http://localhost:3000/teachers';
 
- getTeachers(){
+  constructor(private http: HttpClient) {}
 
- }
+  getTeachers(): Observable<Teacher[]> {
+    return this.http.get<Teacher[]>(this.apiUrl);
+  }
 
- getTeacher(documento){
+  createTeacher(teacher: Teacher): Observable<Teacher> {
+    return this.http.post<Teacher>(this.apiUrl, teacher);
+  }
 
- }
- 
- createTeacher(teacher){
-
- }
-
- deleteTeacher(documento){
-
- }
-
- updateProduct(documento){
-
- }
-
-
- 
+  deleteTeacher(documento: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${documento}`);
+  }
+  updateTeacher(documento: string, teacher: Teacher): Observable<Teacher> {
+    return this.http.put<Teacher>(`${this.apiUrl}/${documento}`, teacher);
+  }
 }

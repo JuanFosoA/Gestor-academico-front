@@ -1,0 +1,36 @@
+<h2>Teachers</h2>
+<div>
+  <input [(ngModel)]="newTeacher.nombre" placeholder="Name">
+  <input [(ngModel)]="newTeacher.documento" placeholder="Name">
+  <input [(ngModel)]="newTeacher.fechaContrato" placeholder="Contrato" type="date">
+  <button (click)="addTeacher()">Add</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Documento</th>
+      <th>Name</th>
+      <th>Department ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let teacher of teachers">
+      <td>{{ teacher.documento }}</td>
+      <td>{{ teacher.name }}</td>
+      <td>{{ teacher.departmentId }}</td>
+      <td>
+        <button (click)="editTeacher(teacher)">Edit</button>
+        <button (click)="deleteTeacher(teacher.documento)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="editingTeacher">
+  <h3>Edit Teacher</h3>
+  <input [(ngModel)]="newTeacher.nombre" placeholder="Name">
+  <input [(ngModel)]="newTeacher.fechaContrato" placeholder="Contrato" type="date">
+  <button (click)="updateTeacher()">Update</button>
+</div>

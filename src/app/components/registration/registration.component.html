@@ -1,0 +1,58 @@
+<div class="container">
+  <h2>Lista de Inscripciones</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cédula Estudiante</th>
+        <th>ID Curso</th>
+        <th>Documento Profesor</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let registration of registrations">
+        <td>{{ registration.id }}</td>
+        <td>{{ registration.studentCedula }}</td>
+        <td>{{ registration.courseId }}</td>
+        <td>{{ registration.teacherDocumento }}</td>
+        <td>{{ registration.estado }}</td>
+        <td>
+          <button (click)="deleteRegistration(registration.id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Agregar Inscripción</h3>
+  <form (ngSubmit)="addRegistration()">
+    <label>Cédula Estudiante:</label>
+    <input
+      type="text"
+      [(ngModel)]="newRegistration.studentCedula"
+      name="studentCedula"
+      required
+    />
+
+    <label>ID Curso:</label>
+    <input
+      type="number"
+      [(ngModel)]="newRegistration.courseId"
+      name="courseId"
+      required
+    />
+
+    <label>Documento Profesor:</label>
+    <input
+      type="text"
+      [(ngModel)]="newRegistration.teacherDocumento"
+      name="teacherDocumento"
+      required
+    />
+
+    <button type="submit">Agregar</button>
+  </form>
+</div>
