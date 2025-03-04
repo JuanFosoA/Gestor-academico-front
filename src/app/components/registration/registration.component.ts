@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Registration, RegistrationsService } from '../../services/registration.service';
-
+import {
+  Registration,
+  RegistrationsService,
+} from '../../services/registration.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-registrations',
-  templateUrl: './registrations.component.html',
-  styleUrls: ['./registrations.component.css']
+  imports: [CommonModule, FormsModule],
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css'],
 })
 export class RegistrationsComponent implements OnInit {
   registrations: Registration[] = [];
-  newRegistration: Registration = { studentCedula: '', courseId: 0, teacherDocumento: '' };
+  newRegistration: Registration = {
+    studentCedula: '',
+    courseId: 0,
+    teacherDocumento: '',
+  };
 
   constructor(private registrationsService: RegistrationsService) {}
 
@@ -18,17 +27,31 @@ export class RegistrationsComponent implements OnInit {
   }
 
   loadRegistrations() {
-    this.registrationsService.getRegistrations().subscribe(data => this.registrations = data);
+    this.registrationsService
+      .getRegistrations()
+      .subscribe((data) => (this.registrations = data));
   }
 
   addRegistration() {
-    this.registrationsService.createRegistration(this.newRegistration).subscribe(() => {
-      this.loadRegistrations();
-      this.newRegistration = { studentCedula: '', courseId: 0, teacherDocumento: '' };
-    });
+    this.registrationsService
+      .createRegistration(this.newRegistration)
+      .subscribe(() => {
+        this.loadRegistrations();
+        this.newRegistration = {
+          studentCedula: '',
+          courseId: 0,
+          teacherDocumento: '',
+        };
+      });
   }
 
-  deleteRegistration(id: number) {
-    this.registrationsService.deleteRegistration(id).subscribe(() => this.loadRegistrations());
+  deleteRegistration(id?: number) {
+    if (id === undefined) {
+      console.error('No se puede eliminar un registro sin un ID válido.');
+      return;
+    }
+    this.registrationsService
+      .deleteRegistration(id)
+      .subscribe(() => this.loadRegistrations());
   }
 }

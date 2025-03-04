@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Grade, GradeService } from '../../services/grade.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-grade',
-  imports: [],
+  imports:[CommonModule,FormsModule],
   templateUrl: './grade.component.html',
   styleUrl: './grade.component.css'
 })

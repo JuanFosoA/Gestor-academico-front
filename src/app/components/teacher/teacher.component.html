@@ -3,6 +3,7 @@
   <input [(ngModel)]="newTeacher.nombre" placeholder="Name">
   <input [(ngModel)]="newTeacher.documento" placeholder="Name">
   <input [(ngModel)]="newTeacher.fechaContrato" placeholder="Contrato" type="date">
+  
   <button (click)="addTeacher()">Add</button>
 </div>
 
@@ -18,7 +19,7 @@
   <tbody>
     <tr *ngFor="let teacher of teachers">
       <td>{{ teacher.documento }}</td>
-      <td>{{ teacher.name }}</td>
+      <td>{{ teacher.nombre }}</td>
       <td>{{ teacher.departmentId }}</td>
       <td>
         <button (click)="editTeacher(teacher)">Edit</button>
