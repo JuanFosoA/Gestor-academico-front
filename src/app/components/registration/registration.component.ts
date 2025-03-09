@@ -17,13 +17,17 @@ import { CoursesService } from '../../services/courses.service';
 export class RegistrationsComponent implements OnInit {
   registrations: Registration[] = [];
   courses: Course[] = [];
-  newRegistration: Partial<Registration>={};
+  newRegistration: Partial<Registration> = {};
+  editingRegistration: Registration | null = null;
 
-  constructor(private registrationsService: RegistrationsService, private coursesService:CoursesService) {}
+  constructor(
+    private registrationsService: RegistrationsService,
+    private coursesService: CoursesService
+  ) {}
 
   ngOnInit() {
     this.loadRegistrations();
-    this.loadCourses()
+    this.loadCourses();
   }
 
   loadRegistrations() {
@@ -32,9 +36,8 @@ export class RegistrationsComponent implements OnInit {
       .subscribe((data) => (this.registrations = data));
   }
 
-
-  loadCourses(){
-    this.coursesService.getCourses().subscribe((data)=>(this.courses=data))
+  loadCourses() {
+    this.coursesService.getCourses().subscribe((data) => (this.courses = data));
   }
 
   addRegistration() {
@@ -42,14 +45,21 @@ export class RegistrationsComponent implements OnInit {
     console.log(this.newRegistration.teacherDocumento);
     console.log(this.newRegistration.courseId);
     console.log(this.newRegistration.fecha_inscripcion);
-    if(this.newRegistration.courseId && this.newRegistration.fecha_inscripcion && this.newRegistration.studentCedula && this.newRegistration.teacherDocumento){
-
-      
-      this.newRegistration.fecha_inscripcion = new Date(this.newRegistration.fecha_inscripcion)
-      this.registrationsService.createRegistration(this.newRegistration as Registration).subscribe(registration => {
-        this.registrations.push(registration)
-        this.newRegistration = {}
-      });
+    if (
+      this.newRegistration.courseId &&
+      this.newRegistration.fecha_inscripcion &&
+      this.newRegistration.studentCedula &&
+      this.newRegistration.teacherDocumento
+    ) {
+      this.newRegistration.fecha_inscripcion = new Date(
+        this.newRegistration.fecha_inscripcion
+      );
+      this.registrationsService
+        .createRegistration(this.newRegistration as Registration)
+        .subscribe((registration) => {
+          this.registrations.push(registration);
+          this.newRegistration = {};
+        });
     }
   }
 
@@ -61,5 +71,31 @@ export class RegistrationsComponent implements OnInit {
     this.registrationsService
       .deleteRegistration(id)
       .subscribe(() => this.loadRegistrations());
+  }
+
+  editRegistration(registration: Registration) {
+    this.editingRegistration = { ...registration };
+  }
+
+  updateRegistration() {
+    if (this.editingRegistration) {
+      this.registrationsService
+        .updateRegistration(this.editingRegistration)
+        .subscribe((updateRegistration) => {
+          const index = this.registrations.findIndex(
+            (s) => s.id === updateRegistration.id
+          );
+          if (index !== -1) {
+            this.registrations[index] = updateRegistration;
+          }
+          this.editingRegistration = null;
+          this.loadRegistrations();
+        });
+    }
+  }
+
+  getCourseName(courseId: number): string {
+    const course = this.courses.find((d) => d.id === courseId);
+    return course ? course.nombre : 'Unknown';
   }
 }

@@ -28,7 +28,7 @@ export class TeachersService {
   deleteTeacher(documento: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${documento}`);
   }
-  updateTeacher(documento: string, teacher: Teacher): Observable<Teacher> {
-    return this.http.put<Teacher>(`${this.apiUrl}/${documento}`, teacher);
+  updateTeacher(teacher: Teacher): Observable<Teacher> {
+    return this.http.patch<Teacher>(`${this.apiUrl}/${teacher.documento}`, teacher);
   }
 }

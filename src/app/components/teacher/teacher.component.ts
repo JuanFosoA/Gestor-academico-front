@@ -19,7 +19,7 @@ export class TeachersComponent implements OnInit {
 
   constructor(private teachersService: TeachersService, private departmentService: DepartmentService) {}
 
-  ngOnInit() {
+  ngOnInit():void {
     this.loadTeachers();
     this.loadDepartments()
   }
@@ -59,9 +59,13 @@ export class TeachersComponent implements OnInit {
 
   updateTeacher() {
     if (this.editingTeacher) {
-      this.teachersService.updateTeacher(this.editingTeacher.documento, this.editingTeacher).subscribe(() => {
-        this.loadTeachers();
+      this.teachersService.updateTeacher(this.editingTeacher).subscribe(updateTeacher => {
+        const index = this.teachers.findIndex(s => s.documento === updateTeacher.documento);
+        if (index !== -1) {
+          this.teachers[index] = updateTeacher;
+        }
         this.editingTeacher = null;
+        this.loadTeachers();
       });
     }
   }

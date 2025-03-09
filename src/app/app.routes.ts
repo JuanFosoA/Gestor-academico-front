@@ -4,7 +4,7 @@ import { CourseComponent } from './components/courses/courses.component';
 import { StudentComponent } from './components/student/student.component';
 import { TeachersComponent } from './components/teacher/teacher.component';
 import { RegistrationsComponent } from './components/registration/registration.component';
-import { GradeComponent } from './components/grade/grade.component';
+import { TestComponent } from './components/test/test.component';
 
 export const routes: Routes = [
   { path: 'departments', component: DepartmentComponent },
@@ -12,5 +12,5 @@ export const routes: Routes = [
   { path: 'students', component: StudentComponent },
   { path: 'teachers', component: TeachersComponent },
   { path: 'registrations', component: RegistrationsComponent },
-  { path: 'grades', component: GradeComponent },
+  { path: 'tests', component: TestComponent },
 ];
