@@ -1,0 +1,72 @@
+<h2>Calificaciones</h2>
+<div>
+  <label for="">Código</label>
+  <input [(ngModel)]="newTest.codigo" placeholder="Codigo" />
+  <label for="">Descripcion</label>
+  <input [(ngModel)]="newTest.descripcion" placeholder="Descripcion" />
+  <label for="">Fecha evaliación</label>
+  <input [(ngModel)]="newTest.fecha" placeholder="fecha" type="date" />
+  <label>Curso:</label>
+  <select [(ngModel)]="newTest.courseId">
+    <option *ngFor="let course of courses" [value]="course.id">
+      {{ course.nombre }}
+    </option>
+  </select>
+  <label>Estudiante:</label>
+  <input
+    [(ngModel)]="newTest.studentDocument"
+    placeholder="Docuemnto estudiante"
+  />
+
+  <button (click)="addTest()">Add</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Descripcion</th>
+      <th>Fecha</th>
+      <th>Curso</th>
+      <th>Estudiante</th>
+      <th>Calificacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let test of tests">
+      <td>{{ test.codigo }}</td>
+      <td>{{ test.descripcion }}</td>
+      <td>{{ test.fecha }}</td>
+      <td>{{ getCourseName(test.courseId) }}</td>
+      <td>{{ getStudentName(test.studentDocument) }}</td>
+      <td>{{test.grade}}</td>
+      <td>
+        <button (click)="editTest(test)">Edit</button>
+        <button (click)="deleteTest(test.codigo)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="editingTest">
+  <h3>Edit Test</h3>
+  <label for="">Fecha evaliación</label>
+  <input [(ngModel)]="editingTest.fecha" placeholder="fecha" type="date" />
+  <label>Curso:</label>
+  <select [(ngModel)]="editingTest.courseId">
+    <option *ngFor="let course of courses" [value]="course.id">
+      {{ course.nombre }}
+    </option>
+  </select>
+  <label>Estudiante:</label>
+  <input
+    [(ngModel)]="editingTest.studentDocument"
+    placeholder="Docuemnto estudiante"
+   />
+   <label>Calificacion:</label>
+  <input
+    [(ngModel)]="editingTest.grade"
+    placeholder="grade"
+   />
+  <button (click)="updateTest()">Update</button>
+</div>

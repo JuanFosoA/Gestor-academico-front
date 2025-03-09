@@ -13,6 +13,7 @@ import { Department } from './department.model';
 })
 export class DepartmentComponent implements OnInit {
   departments: Department[] = [];
+  selectedDepartment: string = '';
   newDepartment: Partial<Department> = {};
   editingDepartment: Department | null = null;
 

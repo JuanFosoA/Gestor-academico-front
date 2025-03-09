@@ -5,7 +5,13 @@
   <input [(ngModel)]="newStudent.fechaNacimiento" placeholder="Birthdate" type="date">
   <button (click)="addStudent()">Add</button>
 </div>
-
+<div *ngIf="editingStudent">
+  <h3>Edit Student</h3>
+  <input [(ngModel)]="editingStudent.nombre" placeholder="Name">
+  <input [(ngModel)]="editingStudent.cedula" placeholder="Documento" disabled>
+  <input [(ngModel)]="editingStudent.fechaNacimiento" placeholder="Birthdate" type="date">
+  <button (click)="updateStudent()">Update</button>
+</div>
 <table>
   <thead>
     <tr>
@@ -28,10 +34,3 @@
   </tbody>
 </table>
 
-<div *ngIf="editingStudent">
-  <h3>Edit Student</h3>
-  <input [(ngModel)]="editingStudent.nombre" placeholder="Name">
-  <input [(ngModel)]="editingStudent.cedula" placeholder="Documento" disabled>
-  <input [(ngModel)]="editingStudent.fechaNacimiento" placeholder="Birthdate" type="date">
-  <button (click)="updateStudent()">Update</button>
-</div>

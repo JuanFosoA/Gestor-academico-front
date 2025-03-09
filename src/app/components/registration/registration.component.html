@@ -1,0 +1,94 @@
+  <div class="container">
+  <h3>Agregar Inscripción</h3>
+  <div>
+    <label for="">Fecha contrato</label>
+    <input
+      [(ngModel)]="newRegistration.fecha_inscripcion"
+      placeholder="Fecha inscripcion"
+      type="date"
+    />
+    <label>Cédula Estudiante:</label>
+    <input
+      type="text"
+      [(ngModel)]="newRegistration.studentCedula"
+      name="studentCedula"
+      required
+    />
+    <label>ID Curso:</label>
+    <select [(ngModel)]="newRegistration.courseId">
+      <option *ngFor="let course of courses" [value]="course.id">{{course.nombre}}</option>
+    </select>
+    <label>Documento Profesor:</label>
+    <input
+      type="text"
+      [(ngModel)]="newRegistration.teacherDocumento"
+      name="teacherDocumento"
+      required
+    />
+
+    <button (click)="addRegistration()">Agregar</button>
+  </div>
+
+  <h2>Lista de Inscripciones</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cédula Estudiante</th>
+        <th>ID Curso</th>
+        <th>Documento Profesor</th>
+        <th>Estado</th>
+        <th>Nota final</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let registration of registrations">
+        <td>{{ registration.id }}</td>
+        <td>{{ registration.studentCedula }}</td>
+        <td>{{ getCourseName(registration.courseId) }}</td>
+        <td>{{ registration.teacherDocumento }}</td>
+        <td>{{ registration.estado }}</td>
+        <td>{{ registration.nota_final }}</td>
+        <td>
+          <button (click)="editRegistration(registration)">
+            Edit
+          </button>
+          <button (click)="deleteRegistration(registration.id)">
+            Delete
+          </button>
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="editingRegistration">
+    <h3>Edit Teacher</h3>
+    <label for="">Fecha contrato</label>
+    <input
+      [(ngModel)]="editingRegistration.fecha_inscripcion"
+      placeholder="Fecha inscripcion"
+      type="date"
+    />
+    <label>Cédula Estudiante:</label>
+    <input
+      type="text"
+      [(ngModel)]="editingRegistration.studentCedula"
+      name="studentCedula"
+      required
+    />
+    <label>ID Curso:</label>
+    <select [(ngModel)]="editingRegistration.courseId">
+      <option *ngFor="let course of courses" [value]="course.id">{{course.nombre}}</option>
+    </select>
+    <label>Documento Profesor:</label>
+    <input
+      type="text"
+      [(ngModel)]="editingRegistration.teacherDocumento"
+      name="teacherDocumento"
+      required
+    />
+    <button (click)="updateRegistration()">Update</button>
+  </div>
+</div>
