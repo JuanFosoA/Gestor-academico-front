@@ -8,8 +8,8 @@ import { RegistrationsComponent } from './components/registration/registration.c
 import { TestComponent } from './components/test/test.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/departments', pathMatch: 'full' },
   { path: 'departments', component: DepartmentComponent },
   { path: 'courses', component: CourseComponent },
   { path: 'students', component: StudentComponent },

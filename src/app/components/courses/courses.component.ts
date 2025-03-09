@@ -28,7 +28,7 @@ export class CourseComponent implements OnInit {
   courses: Course[] = [];
   departments: Department[] = [];
   diasSemana = Object.values(DiaSemana);
-
+  prerequisites: string = 'None'; 
   newCourse: Partial<Course> = {};
   editingCourse: Course | null = null;
 
@@ -86,13 +86,12 @@ export class CourseComponent implements OnInit {
     const department = this.departments.find(d => d.id === departmentId);
     return department ? department.nombre : 'Unknown';
   }
-
-  getPrerequisites(prerrequisitos?: number[]): string {
+  
+  extractPrerequisiteNames(prerrequisitos?: { nombre: string }[]): string {
     if (!prerrequisitos || prerrequisitos.length === 0) return 'None';
-    
-    return this.courses
-      .filter(course => prerrequisitos.includes(course.id))
-      .map(course => course.nombre)
-      .join(', ');
+    return prerrequisitos.map(p => p.nombre).join(', ');
   }
+  
+  
+  
 }

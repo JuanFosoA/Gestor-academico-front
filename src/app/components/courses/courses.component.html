@@ -49,7 +49,7 @@
       <td>{{ course.dia }}</td>
       <td>{{ course.horaInicio }} - {{ course.horaFin }}</td>
       <td>{{ getDepartmentName(course.departmentId) }}</td>
-      <td>{{ getPrerequisites(course.prerrequisitos) }}</td>
+      <td>{{ extractPrerequisiteNames(course.prerrequisitos) }}</td>
       <td>
         <button (click)="editCourse(course)">Edit</button>
         <button (click)="deleteCourse(course.id)">Delete</button>

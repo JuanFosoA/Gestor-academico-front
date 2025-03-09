@@ -25,7 +25,7 @@ export class LoginComponent {
       
           this.authService.login(this.loginForm.value).subscribe({
             next: (response) => {
-              this.router.navigate(['/']); 
+              this.router.navigate(['/departments']); 
             },
             error: (err) => {
               console.error('Error en login:', err); 
