@@ -1,6 +1,5 @@
 <h2>Courses</h2>
 
-<!-- Formulario para agregar un curso -->
 <div>
   <input [(ngModel)]="newCourse.nombre" placeholder="Course Name">
   <input [(ngModel)]="newCourse.descripcion" placeholder="Description">
@@ -29,7 +28,6 @@
   <button (click)="addCourse()">Add Course</button>
 </div>
 
-<!-- Tabla de cursos -->
 <table>
   <thead>
     <tr>
@@ -60,7 +58,7 @@
   </tbody>
 </table>
 
-<!-- Formulario de edición -->
+
 <div *ngIf="editingCourse">
   <h3>Edit Course</h3>
   <input [(ngModel)]="editingCourse.nombre">

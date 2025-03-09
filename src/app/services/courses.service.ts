@@ -20,12 +20,12 @@ export class CoursesService {
       return this.http.get<Course>(`${this.apiUrl}/${id}`);
     }
   
-    addCourse(department: Omit<Course, 'id'>): Observable<Course> {
-      return this.http.post<Course>(this.apiUrl, department);
+    addCourse(course: Omit<Course, 'id'>): Observable<Course> {
+      return this.http.post<Course>(this.apiUrl, course);
     }
   
-    updateCourse(department: Course): Observable<Course> {
-      return this.http.patch<Course>(`${this.apiUrl}/${department.id}`, department);
+    updateCourse(course: Course): Observable<Course> {
+      return this.http.patch<Course>(`${this.apiUrl}/${course.id}`, course);
     }
   
     deleteCourse(id: number): Observable<void> {

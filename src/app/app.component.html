@@ -6,8 +6,8 @@
     <title>Header Responsive</title>
 </head>
 <body>
-    <header>
-        <div class="logo">Gestor acádemico</div>
+    <header *ngIf="!isLoginPage">
+        <div class="logo">Gestor académico</div>
         <nav>
             <a routerLink="/departments" routerLinkActive="active">Departamentos</a>
             <a href="#">Profesores</a>
@@ -16,6 +16,7 @@
             <a routerLink="/courses" routerLinkActive="active">Cursos</a>
         </nav>
     </header>
+    
     <main>
         <router-outlet></router-outlet>
     </main>

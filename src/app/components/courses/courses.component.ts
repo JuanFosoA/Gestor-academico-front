@@ -89,8 +89,6 @@ export class CourseComponent implements OnInit {
 
   getPrerequisites(prerrequisitos?: number[]): string {
     if (!prerrequisitos || prerrequisitos.length === 0) return 'None';
-    console.log('Cursos disponibles:', this.courses);
-    console.log('Prerrequisitos recibidos:', prerrequisitos);
     
     return this.courses
       .filter(course => prerrequisitos.includes(course.id))
