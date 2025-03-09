@@ -5,6 +5,8 @@ import {
 } from '../../services/registration.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Course } from '../courses/courses.model';
+import { CoursesService } from '../../services/courses.service';
 
 @Component({
   selector: 'app-registrations',
@@ -14,16 +16,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class RegistrationsComponent implements OnInit {
   registrations: Registration[] = [];
-  newRegistration: Registration = {
-    studentCedula: '',
-    courseId: 0,
-    teacherDocumento: '',
-  };
+  courses: Course[] = [];
+  newRegistration: Partial<Registration>={};
 
-  constructor(private registrationsService: RegistrationsService) {}
+  constructor(private registrationsService: RegistrationsService, private coursesService:CoursesService) {}
 
   ngOnInit() {
     this.loadRegistrations();
+    this.loadCourses()
   }
 
   loadRegistrations() {
@@ -32,9 +32,15 @@ export class RegistrationsComponent implements OnInit {
       .subscribe((data) => (this.registrations = data));
   }
 
+
+  loadCourses(){
+    this.coursesService.getCourses().subscribe((data)=>(this.courses=data))
+  }
+
   addRegistration() {
+    this.newRegistration.fecha_inscripcion = new Date(this.newRegistration.fecha_inscripcion)
     this.registrationsService
-      .createRegistration(this.newRegistration)
+      .createRegistration(this.newRegistration as Registration)
       .subscribe(() => {
         this.loadRegistrations();
         this.newRegistration = {
