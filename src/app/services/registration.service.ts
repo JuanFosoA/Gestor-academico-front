@@ -8,6 +8,8 @@ export interface Registration {
   courseId: number;
   teacherDocumento: string;
   estado?: string;
+  fecha_inscripcion:Date
+  nota_final?:number
 }
 
 @Injectable({ providedIn: 'root' })

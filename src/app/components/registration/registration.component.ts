@@ -38,17 +38,19 @@ export class RegistrationsComponent implements OnInit {
   }
 
   addRegistration() {
-    this.newRegistration.fecha_inscripcion = new Date(this.newRegistration.fecha_inscripcion)
-    this.registrationsService
-      .createRegistration(this.newRegistration as Registration)
-      .subscribe(() => {
-        this.loadRegistrations();
-        this.newRegistration = {
-          studentCedula: '',
-          courseId: 0,
-          teacherDocumento: '',
-        };
+    console.log(this.newRegistration.studentCedula);
+    console.log(this.newRegistration.teacherDocumento);
+    console.log(this.newRegistration.courseId);
+    console.log(this.newRegistration.fecha_inscripcion);
+    if(this.newRegistration.courseId && this.newRegistration.fecha_inscripcion && this.newRegistration.studentCedula && this.newRegistration.teacherDocumento){
+
+      
+      this.newRegistration.fecha_inscripcion = new Date(this.newRegistration.fecha_inscripcion)
+      this.registrationsService.createRegistration(this.newRegistration as Registration).subscribe(registration => {
+        this.registrations.push(registration)
+        this.newRegistration = {}
       });
+    }
   }
 
   deleteRegistration(id?: number) {

@@ -1,9 +1,20 @@
 <h2>Teachers</h2>
 <div>
-  <input [(ngModel)]="newTeacher.nombre" placeholder="Name">
-  <input [(ngModel)]="newTeacher.documento" placeholder="Name">
-  <input [(ngModel)]="newTeacher.fechaContrato" placeholder="Contrato" type="date">
-  
+  <label for="">Nombre</label>
+  <input [(ngModel)]="newTeacher.nombre" placeholder="Nombre" />
+  <label for="">Cédula</label>
+  <input [(ngModel)]="newTeacher.documento" placeholder="Documento" />
+  <label>Departamento:</label>
+  <select [(ngModel)]="newTeacher.departmentId">
+    <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.nombre }}</option>
+  </select>
+  <label for="">Fecha contrato</label>
+  <input
+    [(ngModel)]="newTeacher.fechaContrato"
+    placeholder="Contrato"
+    type="date"
+  />
+
   <button (click)="addTeacher()">Add</button>
 </div>
 
@@ -13,6 +24,7 @@
       <th>Documento</th>
       <th>Name</th>
       <th>Department ID</th>
+      <th>Fecha contrato</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -21,6 +33,7 @@
       <td>{{ teacher.documento }}</td>
       <td>{{ teacher.nombre }}</td>
       <td>{{ teacher.departmentId }}</td>
+      <td>{{ teacher.fechaContrato }}</td>
       <td>
         <button (click)="editTeacher(teacher)">Edit</button>
         <button (click)="deleteTeacher(teacher.documento)">Delete</button>
@@ -31,7 +44,17 @@
 
 <div *ngIf="editingTeacher">
   <h3>Edit Teacher</h3>
-  <input [(ngModel)]="newTeacher.nombre" placeholder="Name">
-  <input [(ngModel)]="newTeacher.fechaContrato" placeholder="Contrato" type="date">
+  <label for="">Nombre</label>
+  <input [(ngModel)]="newTeacher.nombre" placeholder="Nombre" />
+  <label>Departamento:</label>
+  <select [(ngModel)]="newTeacher.departmentId">
+    <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.nombre }}</option>
+  </select>
+  <label for="">Fecha Contrato</label>
+  <input
+    [(ngModel)]="newTeacher.fechaContrato"
+    placeholder="Contrato"
+    type="date"
+  />
   <button (click)="updateTeacher()">Update</button>
 </div>

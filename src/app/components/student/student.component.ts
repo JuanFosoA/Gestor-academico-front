@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Student } from './student.model';
 import { StudentService } from '../../services/student.service';
+import { DepartmentService } from '../../services/department.service';
 
 @Component({
   selector: 'app-student',
@@ -15,7 +16,7 @@ export class StudentComponent implements OnInit{
   newStudent: Partial<Student> = {};
   editingStudent: Student | null = null;
 
-  constructor(private studentService: StudentService) {}
+  constructor(private studentService: StudentService, private departmentService: DepartmentService) {}
 
   ngOnInit(): void {
     this.loadStudents();

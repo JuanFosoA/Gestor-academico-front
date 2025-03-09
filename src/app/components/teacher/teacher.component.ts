@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Teacher, TeachersService } from '../../services/teachers.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Department } from '../department/department.model';
+import { DepartmentService } from '../../services/department.service';
 
 @Component({
   selector: 'app-teachers',
@@ -11,24 +13,40 @@ import { FormsModule } from '@angular/forms';
 })
 export class TeachersComponent implements OnInit {
   teachers: Teacher[] = [];
+  departments: Department[] = [];
   newTeacher: Partial<Teacher>={};
   editingTeacher: Teacher | null = null;
 
-  constructor(private teachersService: TeachersService) {}
+  constructor(private teachersService: TeachersService, private departmentService: DepartmentService) {}
 
   ngOnInit() {
     this.loadTeachers();
+    this.loadDepartments()
   }
 
   loadTeachers() {
     this.teachersService.getTeachers().subscribe(data => this.teachers = data);
   }
 
-  addTeacher() {
-    this.teachersService.createTeacher(this.newTeacher as Teacher).subscribe((teacher) => {
-      this.teachers.push(teacher)
-      this.newTeacher = {}
+  loadDepartments(): void {
+    this.departmentService.getDepartments().subscribe(data => {
+      this.departments = data;
     });
+  }
+
+  addTeacher() {
+    if(this.newTeacher.nombre && this.newTeacher.documento && this.newTeacher.fechaContrato && this.newTeacher.departmentId){
+      this.newTeacher.fechaContrato = new Date(this.newTeacher.fechaContrato);
+      this.teachersService.createTeacher(this.newTeacher as Teacher).subscribe(teacher => {
+        console.log(this.newTeacher.nombre);
+        console.log(this.newTeacher.documento);
+        console.log(this.newTeacher.departmentId);
+        console.log(this.newTeacher.fechaContrato);
+        this.teachers.push(teacher)
+        this.newTeacher = {}
+      });
+    }
+
   }
 
   deleteTeacher(documento: string) {
@@ -46,5 +64,10 @@ export class TeachersComponent implements OnInit {
         this.editingTeacher = null;
       });
     }
+  }
+
+  getDepartmentName(departmentId: number): string {
+    const department = this.departments.find(d => d.id === departmentId);
+    return department ? department.nombre : 'Unknown';
   }
 }

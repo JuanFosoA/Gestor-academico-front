@@ -1,4 +1,34 @@
 <div class="container">
+  <h3>Agregar Inscripción</h3>
+  <div>
+    <label for="">Fecha contrato</label>
+    <input
+      [(ngModel)]="newRegistration.fecha_inscripcion"
+      placeholder="Fecha inscripcion"
+      type="date"
+    />
+    <label>Cédula Estudiante:</label>
+    <input
+      type="text"
+      [(ngModel)]="newRegistration.studentCedula"
+      name="studentCedula"
+      required
+    />
+    <label>ID Curso:</label>
+    <select [(ngModel)]="newRegistration.courseId">
+      <option *ngFor="let course of courses" [value]="course.id">{{course.nombre}}</option>
+    </select>
+    <label>Documento Profesor:</label>
+    <input
+      type="text"
+      [(ngModel)]="newRegistration.teacherDocumento"
+      name="teacherDocumento"
+      required
+    />
+
+    <button (click)="addRegistration()">Agregar</button>
+  </div>
+
   <h2>Lista de Inscripciones</h2>
   <table>
     <thead>
@@ -26,33 +56,4 @@
       </tr>
     </tbody>
   </table>
-
-  <h3>Agregar Inscripción</h3>
-  <form (ngSubmit)="addRegistration()">
-    <label>Cédula Estudiante:</label>
-    <input
-      type="text"
-      [(ngModel)]="newRegistration.studentCedula"
-      name="studentCedula"
-      required
-    />
-
-    <label>ID Curso:</label>
-    <input
-      type="number"
-      [(ngModel)]="newRegistration.courseId"
-      name="courseId"
-      required
-    />
-
-    <label>Documento Profesor:</label>
-    <input
-      type="text"
-      [(ngModel)]="newRegistration.teacherDocumento"
-      name="teacherDocumento"
-      required
-    />
-
-    <button type="submit">Agregar</button>
-  </form>
 </div>
