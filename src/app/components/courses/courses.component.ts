@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CoursesService } from '../../services/courses.service';
 import { DepartmentService } from '../../services/department.service';
-import { Course } from './courses.model';
+import { Course, UpdateCourse } from './courses.model';
 import { Department } from '../department/department.model';
 
 export enum DiaSemana {
@@ -66,7 +66,14 @@ export class CourseComponent implements OnInit {
 
   updateCourse(): void {
     if (this.editingCourse) {
-      this.courseService.updateCourse(this.editingCourse).subscribe(updatedCourse => {
+      const { prerrequisitos, ...courseData } = this.editingCourse;
+  
+      const updatedCourse: UpdateCourse = {
+        ...courseData,
+        prerrequisitos: prerrequisitos?.map(p => p.id) || []
+      };
+  
+      this.courseService.updateCourse(updatedCourse).subscribe(updatedCourse => {
         const index = this.courses.findIndex(c => c.id === updatedCourse.id);
         if (index !== -1) {
           this.courses[index] = updatedCourse;

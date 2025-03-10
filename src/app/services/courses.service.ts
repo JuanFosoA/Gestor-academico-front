@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Course } from '../components/courses/courses.model';
+import { Course, UpdateCourse } from '../components/courses/courses.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -43,7 +43,7 @@ export class CoursesService {
    * @param course Objeto con los datos actualizados del curso.
    * @returns Un observable con el curso modificado.
    */
-  updateCourse(course: Course): Observable<Course> {
+  updateCourse(course: UpdateCourse): Observable<Course> {
     return this.http.patch<Course>(`${this.apiUrl}/${course.id}`, course);
   }
 

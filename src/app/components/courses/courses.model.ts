@@ -10,3 +10,14 @@ export interface Course {
     horaFin: string;
     departmentId: number;
 }
+
+export interface UpdateCourse {
+    id: number;
+    nombre: string;
+    descripcion: string;
+    prerrequisitos?: number[];
+    dia: DiaSemana;
+    horaInicio: string;
+    horaFin: string;
+    departmentId: number;
+}
